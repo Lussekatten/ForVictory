@@ -13,7 +13,10 @@ namespace FileHandlingTest
             //ReadFromFile();
             //Console.Read();
 
-            AddNumbersFromString();
+            //AddNumbersFromString();
+            //Console.Read();
+
+            SortNumbersFromString();
             Console.Read();
         }
 
@@ -68,6 +71,44 @@ namespace FileHandlingTest
                 sum += int.Parse(arr[i]);
             }
             Console.WriteLine("Summan blir lika med {0}",sum);
+        }
+
+        static void SortNumbersFromString()
+        {
+            Console.WriteLine("Skriv dina heltal, komma separerade");
+            string fromUser = Console.ReadLine();
+            string[] arr = fromUser.Split(',');
+
+            //Transform string array to int array so that we can sort
+            int[] intArr = new int[arr.Length];
+
+            for (int i = 0; i < arr.Length; i++)
+            {
+                intArr[i] = int.Parse(arr[i]);
+            }
+
+            //Bubble sorting now
+            for (int r = 1; r < intArr.Length; r++)
+            {
+                //The inner loop pushes the largest integer to the end of the array
+                for (int i = 0; i < intArr.Length-r; i++)
+                {
+                    if (intArr[i] > intArr[i+1])
+                    {
+                        int temp = intArr[i];
+                        intArr[i] = intArr[i+1];
+                        intArr[i + 1] = temp;
+                    }
+                }
+            }
+
+            string finalSorted = "";
+            Console.Write("Sorterade nummer: ");
+            foreach (var item in intArr)
+            {
+                finalSorted += item.ToString() + ", ";
+            }
+            Console.Write(finalSorted.Substring(0,finalSorted.Length-2));
         }
     }
 }
